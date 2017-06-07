@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WebCoder</title>
+	<meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html"; charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+
+	<style type="text/css">
+
+		body{
+			padding:0;
+			margin:0;
+			font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   			font-weight: 300;
+		}
+		
+		#menu{
+			width:100%;
+			height: 40px;
+			background-color: #3fb8ff;
+			border-bottom: 1px solid blue;
+		}
+
+		#logo{
+			padding: 5px;
+			font-size: 120%;
+			float: left;
+
+
+		}
+		#button{
+			float: right;
+			padding: 5px;
+		}
+
+		#run{
+			font-size: 100%;
+		}
+
+		#toggle{
+
+			list-style: none;
+			width:177.5px;
+			border:1px solid grey;
+			margin: 0 auto;
+			padding: 0px;
+			height:28px;
+			position: relative;
+			top:5px;
+			border-radius: 5px;
+
+		}
+
+		#toggle li{
+			float: left;
+			border-right: 1px solid grey;
+			padding:5px;
+
+
+		}
+
+		#res{
+			border: none !important;
+		}
+
+		.clear{
+			clear: both;
+		}
+
+		.code{
+			
+			
+			width: 50%;
+			float: left;
+			position: relative;
+		}
+
+		.code textarea{
+			width: 100%;
+			height: 100%;
+			border:none;
+			border-right: 1px solid grey;
+			box-sizing: border-box;
+			font-family: monotype;
+			font-size: 100%;
+
+
+		}
+
+		.label{
+			position: absolute;
+			top: 10px;
+			right: 5px;
+		}
+
+		#CSS ,#JS{
+			display: none;
+		}
+
+		iframe{
+			height: 100%;
+			position: relative;
+			border:none;
+			left: 10px;
+		}
+
+		.selected{
+			background-color: #3174c6;
+		}
+
+
+
+
+	</style>
+
+
+</head>
+<body>
+
+	<div id="wrapper">
+		
+			<div id="menu">
+
+				<div id="logo">WebCoder</div>
+
+				<div id="button">
+
+					<button id="run">Run</button>
+
+				</div>
+
+				<ul id="toggle">
+					<li class="toggle selected">HTML</li>
+					<li class="toggle">CSS</li>
+					<li class="toggle">JS</li>
+					<li class="toggle selected" id="res">Result</li>
+
+
+				</ul>
+				
+
+
+
+			</div>
+
+			<div class="clear"></div>
+
+			<div class="code" id="HTML">
+
+			<div class="label">HTML</div>
+				
+				<textarea id="htmlCode"> Write Code here...</textarea>
+
+			</div>
+
+			<div class="code" id="CSS">
+
+			<div class="label">CSS</div>
+				
+				<textarea id="cssCode"> Write Code here...</textarea>
+
+			</div>
+
+			<div class="code" id="JS">
+
+			<div class="label">JavaScript</div>
+				
+				<textarea id="jsCode"> Write Code here...</textarea>
+
+			</div>
+
+			<div class="code" id="Result">
+
+			<div class="label">Result</div>
+				
+				<iframe id="resFrame"></iframe>
+
+			</div>
+
+			
+
+
+
+
+
+
+
+
+	</div>
+
+		<script type="text/javascript">
+			
+			var winHeight=$(window).height();
+			var menuHeight=$("#menu").height();
+
+			var codeHeight=winHeight-menuHeight;
+
+			$(".code").height(codeHeight+"px");
+
+			$(".toggle").click(function(){
+
+					$(this).toggleClass("selected");
+
+					 var activeDiv=$(this).html();
+
+					 $("#html").toggle();
+					 $("#"+activeDiv).toggle();
+
+					 var showingDivs=$(".code").filter(function(){
+					 		return($(this).css("display")!="none");
+					 }).length;
+
+					 var width=100/showingDivs;
+
+					 $(".code").width(width+"%");
+
+
+			});
+
+			$("#run").click(function(){
+
+				$("iframe").contents().find("html").html('<style>'+$("cssCode").val()+'</style>'+$("#htmlCode").val());
+
+				document.getElementById('resFrame').contentWindow.eval($("#jsCode").val());
+
+
+			});
+
+
+		</script>
+
+</body>
+</html>
