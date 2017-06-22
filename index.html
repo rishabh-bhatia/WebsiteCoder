@@ -10,6 +10,20 @@
   integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
   crossorigin="anonymous"></script>
 
+  <script type="text/javascript">
+  	
+  	function onLoad() {
+
+			var toggleWidth=$("#a").width()+$("#b").width()+$("#c").width()+$("#res").width();
+  			//window.alert(toggleWidth);
+
+            $("#toggle").css("width", (toggleWidth+43)+ "px");
+
+		}
+
+		window.onload=onLoad;
+  </script>
+
 	<style type="text/css">
 
 		body{
@@ -45,7 +59,7 @@
 		#toggle{
 
 			list-style: none;
-			width:20.7%;
+			
 			border:1px solid grey;
 			margin: 0 auto;
 			padding: 0px;
@@ -58,6 +72,8 @@
 
 		#toggle li{
 			float: left;
+			position: relative;
+			left: 0px;
 			border-right: 1px solid grey;
 			padding:5px;
 
@@ -104,7 +120,7 @@
 
 		iframe{
 			height: 100%;
-			width: 100%;
+			width:100%;
 			position: relative;
 			border:none;
 			left: 10px;
@@ -136,9 +152,9 @@
 				</div>
 
 				<ul id="toggle">
-					<li class="toggle selected">HTML</li>
-					<li class="toggle">CSS</li>
-					<li class="toggle">JS</li>
+					<li class="toggle selected" id="a">HTML</li>
+					<li class="toggle" id="b">CSS</li>
+					<li class="toggle" id="c">JS</li>
 					<li class="toggle selected" id="res">Result</li>
 
 
@@ -195,11 +211,16 @@
 	</div>
 
 		<script type="text/javascript">
+
+		
 			
 			var winHeight=$(window).height();
 			var menuHeight=$("#menu").height();
+			
 
 			var codeHeight=winHeight-menuHeight;
+
+			
 
 			$(".code").height(codeHeight+"px");
 
